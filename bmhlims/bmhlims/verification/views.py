@@ -6,6 +6,12 @@ from .forms import UploadFileForm
 # in verify_samplesheet.py
 #from somewhere import handle_uploaded_file
 
+class UploadSampleSheetView():
+    template_name = ""
+
+
+
+
 def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
