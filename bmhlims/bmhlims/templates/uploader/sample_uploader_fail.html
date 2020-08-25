@@ -67,21 +67,26 @@
   </div>
 </div>
 
-
-
-<div class="page-header">
-  <h1>Sample Sheet Uploader and Verification</h1>
+<div class=container-fluid">
+  <div class="row"></div>
+    <div class="alert alert-danger" role="alert">
+         <h3>Sample Sheet failed verification</h3>
+    </div>
+  </div>
 </div>
 
-<div class=container-fluid">
+<br>
+<div class="container-fluid">
+  <div class="row">
+    <i class="fas fa-exclamation-circle fa-2x" style="color:#ff0000"> This thing failed</i>
+  </div>
+  <br>
+  <div class="row">
+    <i class="fas fa-exclamation-circle fa-2x" style="color:#ff0000"> This other thing failed</i>
+  </div>
+</div>
 
-  <p>Enter sample sheet file and path</p>
 
-  <form>
-  <label for="fname">File:</label>
-  <input type="text" id="fname" name="fname"><br><br>
-  <input type="submit" value="Submit" onclick="enterfile();" href="sample_uploader_pass.html">
-  </form>
 </div>
 
 <br>
@@ -129,7 +134,6 @@
         if(document.getElementById('fname').value.length == 0) {
           alert("Enter a file name")
         } else {
-          window.location.href = "sample_uploader_pass.html"
           fname =( document.getElementById('fname').value)
           var data = {'pieFact': pieFact}
 
@@ -138,7 +142,7 @@
             type: 'POST',
             data: {'fname': fname},
           })
-          location.href = "sample_uploader_pass.html"
+
 
 
         }
