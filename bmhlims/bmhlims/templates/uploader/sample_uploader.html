@@ -29,7 +29,6 @@
       <!--  {# Dashboard styling #} -->
       <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
 
-
 </head>
 
 <body>
@@ -47,7 +46,7 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item active">
-            <a class="nav-link"><i class="fas fa-home"></i>
+            <a class="nav-link" href="sample_uploader.html"><i class="fas fa-home"></i>
               Home <span class="sr-only">(current)</span></a>
           </li>
         </ul>
@@ -58,7 +57,7 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item active">
-            <a class="nav-link"><i class="fas fa-upload"></i>
+            <a class="nav-link" href="sample_uploader.html"><i class="fas fa-upload"></i>
               Upload <span class="sr-only">(current)</span></a>
           </li>
         </ul>
@@ -70,14 +69,14 @@
 
 
 <div class="page-header">
-  <h1>Sample Submission Sheet Uploader and Verification</h1>
+  <h1 style="padding: 20px">Sample Submission Sheet Uploader and Verification</h1>
 </div>
 
 <div class=container-fluid">
 
-  <p>Enter sample submission sheet file and path</p>
+  <p style="padding-left: 10px">Enter sample submission sheet file and path</p>
 
-  <form action="sample_uploader_result.html" method="post">
+  <form action="sample_uploader_result.html" method="post" style="padding-left: 10px">
     <label for="fname">File:</label>
     <input type="text" id="fname" name="fname"><br><br>
     <input type="submit" value="Submit">
@@ -126,12 +125,13 @@
       function enterfile(){
         fname =( document.getElementById('fname').value)
         $.ajax({
-          url: "{% url 'uploader:upload_sample_sheet' %}",
+          url: "",
           type: 'POST',
-          data: {'fname': fname},
+          data: {'filename': fname},
         }).done(function (data) {
-          console.log("after upload response")
-          console.log(data)
+          document.cookie = `result=${data.result}`;
+          document.cookie = `messages=${data.messages}`;
+          window.location.href = data.url;
         })
 
       }
