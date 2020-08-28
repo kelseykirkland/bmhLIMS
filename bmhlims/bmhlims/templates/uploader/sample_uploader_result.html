@@ -67,24 +67,21 @@
   </div>
 </div>
 
-
-
-<div class="page-header">
-  <h1>Sample Submission Sheet Uploader and Verification</h1>
+<div class=container-fluid">
+  <div class="row"></div>
+    <div class="alert alert-success" role="alert">
+         <h3>Sample Sheet passed verification</h3>
+    </div>
+  </div>
 </div>
 
-<div class=container-fluid">
 
-  <p>Enter sample submission sheet file and path</p>
 
-  <form action="sample_uploader_result.html" method="post">
-    <label for="fname">File:</label>
-    <input type="text" id="fname" name="fname"><br><br>
-    <input type="submit" value="Submit">
-  </form>
 </div>
 
 <br>
+
+
 
 <!-- Le javascript
 ================================================== -->
@@ -124,16 +121,21 @@
 
       // Submit button
       function enterfile(){
-        fname =( document.getElementById('fname').value)
-        $.ajax({
-          url: "{% url 'uploader:upload_sample_sheet' %}",
-          type: 'POST',
-          data: {'fname': fname},
-        }).done(function (data) {
-          console.log("after upload response")
-          console.log(data)
-        })
+        if(document.getElementById('fname').value.length == 0) {
+          alert("Enter a file name")
+        } else {
+          fname =( document.getElementById('fname').value)
+          var data = {'pieFact': pieFact}
 
+          $.ajax({
+            url: "{% url 'uploader:upload_sample_sheet' %}",
+            type: 'POST',
+            data: {'fname': fname},
+          })
+
+
+
+        }
       }
 
   </script>

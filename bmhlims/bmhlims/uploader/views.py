@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 #from .forms import UploadFileForm
 
 # Imaginary function to handle an uploaded file.
@@ -10,30 +10,31 @@ from django.views import View
 from django.views.generic import TemplateView
 
 
-#class UploadSampleFileView(View):
-#    template_name = "uploader/sample_uploader.html"
-#    success_url = ''
+class UploadSampleFileView(View):
+    template_name = "uploader/sample_uploader.html"
+    success_url = 'result/'
 
-def my_pretty_view(request):
-    print(request.POST)
-    raise Exception("Poop")
-    return render(request, "sample_uploader.html")
-  # if request.method == 'POST':
-  #      if 'pieFact' in request.POST:
-  #          pieFact = request.POST['pieFact']
-  #          # doSomething with pieFact here...
-  #          return HttpResponse('success')  # if everything is OK
-  #      # nothing went well
-  #      return HttpResponse('FAIL!!!!!')
+    def home_view(self, request):
+        print(request.POST)
+        return render(request, self.template_name)
+
+    def post(self, request):
+        return redirect(self.success_url)
+
+uploader_sample_sheet_view = UploadSampleFileView.as_view()
 
 
-#uploader_sample_sheet_view = UploadSampleFileView.as_view()
+class UploadFileResult(View):
+    template_name = "uploader/sample_uploader_result.html"
+
+    def get_file(request):
+        if request.method == 'POST':
+            fname = request.POST
+            return HttpResponseRedirect('/thanks/')
+        return render(request, 'sample_uploader.html')
 
 
-
-
-
-
+uploader_result_view = UploadFileResult.as_view()
 
 
 #class UploadSampleSheetView():
